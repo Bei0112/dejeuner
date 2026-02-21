@@ -96,8 +96,9 @@
 <body>
   <div class="card">
     <div class="img-wrap">
-      <div class="kawaii">૮꒰ ˶>ᴗ<˶ ꒱ა 🍓</div>
-    </div>
+  <img src="IMG_7203.jpeg" 
+       style="width:220px; border-radius:22px; box-shadow:0 10px 25px rgba(0,0,0,.15);" />
+</div>
 
     <h1>Pauuul :3, ça te dirait qu’on se fasse un petit dej ensemble la semaine prochaine ?</h1>
 
