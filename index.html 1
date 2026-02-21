@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Petit dej ?</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background: #fff7fb;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+      margin:0;
+      text-align:center;
+    }
+
+    .card{
+      background:white;
+      padding:28px 22px;
+      border-radius:18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+      width:min(520px, 92vw);
+    }
+
+    .img-wrap{
+      display:flex;
+      justify-content:center;
+      margin-bottom:12px;
+    }
+
+    /* 可爱图片：用 emoji 也可以很可爱 */
+    .kawaii{
+      font-size:64px;
+      line-height:1;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.10));
+      user-select:none;
+    }
+
+    h1{
+      font-size:22px;
+      margin:10px 0 18px;
+      color:#222;
+    }
+
+    .btns{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+
+    button{
+      border:none;
+      border-radius:999px;
+      padding:14px 22px;
+      font-size:20px;
+      cursor:pointer;
+      transition: transform .15s ease, font-size .15s ease, opacity .15s ease;
+      min-width:140px;
+    }
+
+    #oui{
+      background:#34c759;
+      color:white;
+      font-size:22px;
+    }
+
+    #non{
+      background:#ff3b30;
+      color:white;
+      font-size:22px;
+    }
+
+    button:active{
+      transform: scale(.98);
+    }
+
+    .result{
+      margin-top:18px;
+      font-size:20px;
+      color:#333;
+      display:none;
+    }
+
+    .small{
+      font-size:14px;
+      color:#777;
+      margin-top:10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="img-wrap">
+      <div class="kawaii">૮꒰ ˶>ᴗ<˶ ꒱ა 🍓</div>
+    </div>
+
+    <h1>Pauuul :3, ça te dirait qu’on se fasse un petit dej ensemble la semaine prochaine ?</h1>
+
+    <div class="btns">
+      <button id="oui">Oui</button>
+      <button id="non">Non</button>
+    </div>
+
+    <div id="result" class="result">Moi aussi, j’ai hâte de déjeuner avec toi🤗</div>
+    <div class="small">ps: tu n’as littéralement pas le choix.</div>
+  </div>
+
+  <script>
+    const btnOui = document.getElementById("oui");
+    const btnNon = document.getElementById("non");
+    const result = document.getElementById("result");
+
+    let step = 0; // 0: Non | 1: T'es sûr? | 2: Réfléchis encore | 3: force Oui
+
+    function makeOuiBigger(sizePx){
+      btnOui.style.fontSize = sizePx + "px";
+    }
+
+    function finish(){
+      // 隐藏按钮，显示结果
+      document.querySelector(".btns").style.display = "none";
+      result.style.display = "block";
+    }
+
+    // 点击 Oui：直接结束
+    btnOui.addEventListener("click", finish);
+
+    // 另一个按钮（Non / T'es sûr? / Réfléchis encore / Oui）逐步变化
+    btnNon.addEventListener("click", () => {
+      step++;
+
+      if(step === 1){
+        makeOuiBigger(34);
+        btnNon.textContent = "T’es sûr ?";
+      } else if(step === 2){
+        makeOuiBigger(42);
+        btnNon.textContent = "Réfléchis encore";
+      } else {
+        // step >= 3：两边都变成 Oui（你说“Réfléchis encore也变成Oui”）
+        makeOuiBigger(52);
+        btnNon.textContent = "Oui";
+        btnNon.style.background = "#34c759";
+
+        // 此时点击这个“Oui”也结束
+        btnNon.onclick = finish;
+      }
+    });
+  </script>
+</body>
+</html>
